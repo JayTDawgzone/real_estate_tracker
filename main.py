@@ -26,28 +26,14 @@ def home():
     return render_template('index.html', data=properties)
 
 
-@app.route('/api/new_prop', methods=['POST'])
+@app.route('/api/new_property', methods=['GET','POST'])
 def form():
     if request.method == 'POST':
         form = request.form
-        nickname = form['nickname']
-        apn = form['apn']
-        address = form['inputAddress']
-        address2 = form['inputAddress2']
-        city = form['inputCity']
-        state = form['inputState']
-        zip = form['inputZip']
-        obj = {
-            'nickname': nickname,
-            'apn': apn,
-            'address': address,
-            'address2': address2,
-            'city': city,
-            'state': state,
-            'zip': zip,
-        }
-        new_prop.new_property(obj);
-        return render_template('index.html', data=properties)
+        prop_id = new_prop.new_property(form);
+        print(prop_id)
+        properties = [acct for acct in property_collection.find()]
+        return render_template('property.html', data=properties)
     else:
         return render_template('index.html', data=properties)
 
