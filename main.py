@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, redirect, current_app, request, flash
 from pymongo import MongoClient
 from bson.json_util import dumps
+import new_prop
 from wtforms import Form, TextField, TextAreaField, validators, StringField, SubmitField
 
 
@@ -18,9 +19,15 @@ property_collection = db['properties']
 properties = [acct for acct in property_collection.find()]
 
 
-@app.route('/', methods=['GET', 'POST'])
-def form():
 
+
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    return render_template('index.html', data=properties)
+
+
+@app.route('/api/new_prop', methods=['POST'])
+def form():
     if request.method == 'POST':
         form = request.form
         nickname = form['nickname']
@@ -39,7 +46,7 @@ def form():
             'state': state,
             'zip': zip,
         }
-        print(obj, flush=True)
+        new_prop.new_property(obj);
         return render_template('index.html', data=properties)
     else:
         return render_template('index.html', data=properties)
