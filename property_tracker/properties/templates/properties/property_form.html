@@ -1,0 +1,13 @@
+{% extends "properties/base.html" %}
+
+{% block content %}
+
+  <h1>New Property</h1>
+  <form class="property-form" method="POST">
+    {% csrf_token%}
+    {{form.as_p}}
+    <button type="submit" class="save btn btn-default">Save</button>
+  </form>
+
+  <script>var editor = new MediumEditor('.editable');</script>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "properties/base.html" %}
+
+{% block content %}
+
+  <h1 class='propertytitle'>{{ property.nickname }}</h1>
+  {% if property.published_date %}
+    <div class="date propertydate">
+      {{ property.published_date }}
+    </div>
+  {% else%}
+    <a class='btn btn-primary' href="{% url 'property_publish' pk=property.pk %}">Publish</a>
+  {% endif %}
+
+  <p class ='propertycontent'> {{ property.nickname|safe|linebreaksbr }}</p>
+
+  {% if user.is_authenticated %}
+    <a class='btn btn-primary' href="{% url 'property_edit' pk=property.pk %}">Edit</a>
+    <a class='btn btn-primary' href="{% url 'property_remove' pk=property.pk %}">Remove</a>
+  {% endif %}
+
+{% endblock %}

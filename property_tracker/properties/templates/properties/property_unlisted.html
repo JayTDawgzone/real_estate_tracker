@@ -1,0 +1,14 @@
+{% extends "properties/base.html" %}
+
+{% block content %}
+
+  {% for property in properties %}
+    <div class="property">
+      <p class='date'>Created: {{ property.create_date|date:'d-m-Y'}}</p>
+      <h1><a href="{% url 'property_detail' pk=property.pk %}">{{ property.nickname }}</a></h1>
+      <p>{{property.notes|truncatechars:200}}</p>
+    </div>
+
+  {% endfor %}
+
+{% endblock %}
