@@ -1,0 +1,75 @@
+prop1 = {
+    'nickname': 'Palm Ave',
+    'APN': '021-0033-047-0000',
+    'address': {
+        'full_address': '4613 Palm Ave #3 Sacramento, CA 95842',
+        'street_address': '4613 Palm Ave',
+        'addr_line2': '#3',
+        'city': 'Sacramento',
+        'state': 'CA',
+        'zip': '95842'
+    },
+    'type': 'Condo',
+    'owned_by': 'Pamela Thompson',
+    'property_info': {
+        'square_feet': 1200,
+        'bedrooms': 2,
+        'bathrooms': 1,
+        'stories': 2,
+        'garage': 'yes',
+        'attachemnts': 0,
+        'website': '',
+        'school_district': '',
+        'property_notes': 'This is a property notes field.'
+    },
+    'value': {
+        'purchase_date': '1/1/2008',
+        'purchase_amt': 40500.00,
+        'sold_date': '1/1/2018',
+        'sold_amt': 50500.00,
+        'pct_ownership': 1.0,
+        'assessed_value': 45500.00,
+        'property_tax': 1000.00,
+        'current_value': 46000.00,
+        'value_notes': 'This is a value notes field',
+        'owned_equity': 1.0
+    },
+    'mortage': {
+        'bank': 'Chase Bank',
+        'loan_number': 9721049760,
+        'monthly_pmt': 200.00,
+        'interest': .05,
+        'mortgage_total': 100000.00,
+        'principal': 0,
+        'mortgage_notes': 'This is a mortgate notes field',
+    },
+    'insurance': {
+        'insurance_comany': 'Safeco',
+        'policy_number': 'CCP0037836',
+        'coverage_amt': 200000.00,
+        'effective_date': '1/1/2008',
+        'monthly_pmt': 200.00,
+        'insurance_notes': 'This is an insurance notes field',
+    },
+    'impound': 'no',
+    'custom_fields': {
+        'recorded': 'no',
+        'hud_purchase': 'no',
+        'hud_sold': 'no',
+        'pur_title_co': 'N/A',
+        'sale_title_co': 'N/A'
+    },
+    'status': 'sold',
+    'lease': {
+        'lease_monthly': 800.00,
+        'lease_start': '1/1/2008',
+        'lease_end': '1/1/2009',
+        'leasee': 'Pamela Thompson',
+        'leasee_phone': '916-555-1234',
+    },
+    'expenses': [
+        {'housing_dues': 100.00}, {'electric': 200.00}, {'water': 50.00}
+    ],
+    'property_manager': 'Some Property Manager',
+    'notes': 'This is a notes field.'
+}
