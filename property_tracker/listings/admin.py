@@ -3,11 +3,11 @@ from django.contrib import admin
 from .models import Listing, Maintenance, Rental, Insurance, Expense, Mortgage
 
 class ListingAdmin(admin.ModelAdmin):
-  list_display = ('id', 'title', 'is_published', 'status', 'type','city', 'state', 'price', 'list_date', 'realtor')
+  list_display = ('id', 'title', 'is_published', 'status', 'type','city', 'state', 'asking_price', 'list_date', 'manager')
   list_display_links = ('id', 'title')
   list_filter = ('status','city','state', 'type')
-  list_editable = ('is_published','status', 'price')
-  search_fields = ('title', 'description', 'address', 'city', 'state', 'zipcode', 'price')
+  list_editable = ('is_published','status', 'asking_price')
+  search_fields = ('title', 'description', 'address', 'city', 'state', 'zipcode', 'asking_price')
   list_per_page = 25
 
 class MaintenanceAdmin(admin.ModelAdmin):
@@ -31,14 +31,14 @@ class InsuranceAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 class ExpenseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'listing', 'expense_type','vendor_name', 'amount', 'recurrence', 'autopay')
+    list_display = ('id', 'listing', 'expense_type','vendor_name', 'responsibility', 'autopay')
     list_display_links = ('id', 'listing',)
-    list_filter = ('listing', 'expense_type', 'vendor_name')
-    list_editable = ('amount', 'autopay')
+    list_filter = ('listing', 'expense_type', 'vendor_name', 'responsibility')
+    list_editable = ('responsibility', 'autopay')
     list_per_page = 25
 
 class MortgageAdmin(admin.ModelAdmin):
-    list_display = ('id', 'listing', 'lender','loan_number', 'monthly_pmt', 'mortgage_total', 'principal', 'interest', 'impound')
+    list_display = ('id', 'listing', 'lender','loan_number', 'monthly_pmt', 'principal', 'interest', 'impound')
     list_display_links = ('id', 'listing',)
     list_filter = ('listing', 'lender')
     list_per_page = 25

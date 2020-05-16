@@ -5,30 +5,7 @@
 {% block title %} | {{ listing.title }} {% endblock %}
 
 {% block content %}
-<section id="showcase-inner" class="py-5 text-white">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h1 class="display-4">{{ listing.title }} </h1>
-          <p class="lead">
-            <i class="fas fa-map-marker"></i> {{ listing.city }} {{ listing.state }}, {{ listing.zipcode }}</p>
-        {% if user.is_authenticated %}
-          {% if listing.status == "1" %}
-          <h1 class ="lead"><span class="badge badge-primary">Rented</span></h1>
-          {% elif listing.status == "2" %}
-          <h1 class ="lead"><span class="badge badge-warning">Available</span></h1>
-          {% elif listing.status == "3" %}
-          <h1 class ="lead"><span class="badge badge-success">For Sale</span></h1>
-          {% elif listing.status == "4" %}
-          <h1 class ="lead"><span class="badge badge-danger">Under Construction</span></h1>
-          {% elif listing.status == "5" %}
-          <h1 class ="lead"><span class="badge badge-secondary">Owner Occupied</span></h1>
-          {% endif %}
-        {% endif %}
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- Breadcrumb -->
   <section id="bc" class="mt-3">
@@ -54,10 +31,18 @@
   <section id="listing" class="py-4">
     <div class="container">
       <a href="{% url 'listings' %}" class="btn btn-light mb-4">Back To Listings</a>
+
       <div class="row">
         <div class="col-md-9">
           <!-- Home Main Image -->
-          <img src="{{ listing.photo_main.url }}" alt="" class="img-main img-fluid mb-3">
+          <div class="img-container">
+            <img src="{{ listing.photo_main.url }}" alt="" class="img-main img-fluid mb-3"></img>
+            <div class="bottom-left">
+              <h2>{{listing.address}}, {{ listing.city }}, {{ listing.state }} {{listing.zipcode}} </h2>
+            </div>
+          </div>
+
+
           <!-- Thumbnails -->
           <div class="row mb-5 thumbs">
             {% if listing.photo_1 %}
@@ -104,7 +89,21 @@
             {% endif %}
           </div>
           <!-- Asking Price -->
-          <h2>Asking Price: ${{ listing.price | intcomma }}</h2>
+          <div class="text-center">
+            <h2>Asking Price: ${{ listing.asking_price|intcomma }}</h2>
+            <h3>Target Rent: ${{ listing.target_rent|intcomma }}</h3>
+          </div>
+          <br>
+
+        <div class="container text-center description-container">
+          <p>{{ listing.description }}</p>
+        </div
+
+
+
+
+
+
           <!-- Fields -->
           <div class="row mb-5 fields">
             <div class="col-md-6">
@@ -130,6 +129,11 @@
                 <li class="list-group-item text-secondary">
                   <i class="fas fa-bed"></i> Heating:
                   <span class="float-right">{{ listing.heating }}
+                  </span>
+                </li>
+                <li class="list-group-item text-secondary">
+                  <i class="fas fa-bed"></i> School District:
+                  <span class="float-right">{{ listing.school_district }}
                   </span>
                 </li>
               </ul>
@@ -159,11 +163,52 @@
                   <span class="float-right">{{ listing.ac }}
                   </span>
                 </li>
+                <li class="list-group-item text-secondary">
+                  <i class="fas fa-bed"></i> Neighborhood:
+                  <span class="float-right">{{ listing.neighborhood }}
+                  </span>
+                </li>
 
 
               </ul>
             </div>
           </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              {% if listing.year_built %}
+              <div class="card">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Year Built: {{ listing.year_built }}</li>
+                </ul>
+              </div>
+              {% endif %}
+            </div>
+            <div class="col-md-6">
+              {% if listing.roof_type %}
+              <div class="card">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">Roof Year: {{ listing.roof_year }}</li>
+                  {% if listing.roof_type == "1" %}
+                  <li class="list-group-item">Roof Type: Asphalt</li>
+                  {% elif listing.roof_type == "2" %}
+                  <li class="list-group-item">Roof Type: Clay/Concrete</li>
+                  {% elif listing.roof_type == "3" %}
+                  <li class="list-group-item">Roof Type: Slate</li>
+                  {% elif listing.roof_type == "4" %}
+                  <li class="list-group-item">Roof Type: Metal</li>
+                  {% elif listing.roof_type == "5" %}
+                  <li class="list-group-item">Roof Type: Wood</li>
+                  {% endif %}
+                </ul>
+              </div>
+              {% endif %}
+            </div>
+
+          </div>
+
+
+
 
 <!-- ADMIN ONLY SECTION  -->
 
@@ -179,16 +224,16 @@
                    <h5 class="mb-0">
                      Rental Information
                        {% if item.rental_status == "1" %}
-                       <span class="badge badge-success float-center">Rented</span>
+                       <span class="badge badge-warning float-center">Rented</span>
                        {% endif %}
                        {% if item.rental_status == "2" %}
                        <span class="badge badge-warning float-center">Available</span>
                        {% endif %}
                        {% if item.rental_status == "3" %}
-                       <span class="badge badge-primary float-center">Available Soon</span>
+                       <span class="badge badge-warning float-center">Available Soon</span>
                        {% endif %}
                        {% if item.rental_status == "4" %}
-                       <span class="badge badge-danger float-center">Under Repair</span>
+                       <span class="badge badge-warning float-center">Under Repair</span>
                        {% endif %}
                      <button class="btn btn-warning float-right" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                        Show
@@ -331,7 +376,7 @@
 
           <!-- Expense Information -->
           {% if user.is_authenticated %}
-          {% if listing.expense %}
+          {% if listing.expense.all %}
 
 
 
@@ -405,24 +450,20 @@
           {% endif %}
 
           <!-- Description -->
-          <div class="row mb-5">
-            <div class="col-md-12">
-                {{ listing.description }}
-            </div>
-          </div>
+
         </div>
         <div class="col-md-3">
           {% if user.is_authenticated %}
             {% if listing.status == "1" %}
-            <h1><span class="badge badge-primary">Rented</span></h1>
+            <h1><span class="badge badge-warning">Rented</span></h1>
             {% elif listing.status == "2" %}
             <h1><span class="badge badge-warning">Available</span></h1>
             {% elif listing.status == "3" %}
-            <h1><span class="badge badge-success">For Sale</span></h1>
+            <h1><span class="badge badge-warning">For Sale</span></h1>
             {% elif listing.status == "4" %}
-            <h1><span class="badge badge-danger">Under Construction</span></h1>
+            <h1><span class="badge badge-warning">Under Construction</span></h1>
             {% elif listing.status == "5" %}
-            <h1><span class="badge badge-secondary">Owner Occupied</span></h1>
+            <h1><span class="badge badge-warning">Owner Occupied</span></h1>
             {% endif %}
           {% endif %}
 
@@ -456,14 +497,11 @@
               <h6 class="text-secondary">${{ listing.owned_equity|intcomma }}</h6>
               {% endif %}
 
-              {% if listing.rental %}
-                {% for item in listing.rental.all %}
-                <h6 class='card-text'>Rental Income</h6>
-                <h6 class="text-secondary">${{ item.rental_price|intcomma }}</h6>
-                {% endfor %}
-              {% endif%}
+
+
             </div>
           </div>
+        <button type="button" class="btn btn-lg btn-warning" onclick="CopyLink()">Copy Listing Url</button>
         {% else %}
         <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
         {% endif %}
@@ -491,7 +529,7 @@
             {% else %}
               <input type="hidden" name="user_id" value="0">
             {% endif %}
-            <input type="hidden" name="realtor_email" value="{{ listing.realtor.email }}">
+            <input type="hidden" name="realtor_email" value="{{ listing.manager.email }}">
             <input type="hidden" name="listing_id" value="{{ listing.id }}">
             <div class="form-group">
               <label for="property_name" class="col-form-label">Property:</label>

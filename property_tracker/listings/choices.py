@@ -24,6 +24,16 @@ price_choices = {
   '1000000':'$1M+',
 }
 
+status_choices = {
+  '1':'Rented',
+  '2':'Vacant',
+  '3':'For Sale',
+  '4':'Under Construction',
+  '5':'Buying',
+  '6':'In Escrow',
+  '7':'Sold',
+}
+
 state_choices = {
         'AK': 'Alaska',
         'AL': 'Alabama',

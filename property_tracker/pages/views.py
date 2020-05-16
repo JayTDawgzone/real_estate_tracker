@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from listings.choices import price_choices, bedroom_choices, state_choices
+from listings.choices import price_choices, bedroom_choices, state_choices, status_choices
 
 from listings.models import Listing
-from realtors.models import Realtor
+from managers.models import Manager
 
 def index(request):
     listings = Listing.objects.order_by('-list_date').filter(is_published=True)[:3]
@@ -11,6 +11,7 @@ def index(request):
     context = {
         'listings': listings,
         'state_choices': state_choices,
+        'status_choices': status_choices,
         'bedroom_choices': bedroom_choices,
         'price_choices': price_choices
     }
@@ -20,14 +21,14 @@ def index(request):
 
 def about(request):
     # Get all realtors
-    realtors = Realtor.objects.order_by('-hire_date')
+    managers = Manager.objects
 
     # Get MVP
-    mvp_realtors = Realtor.objects.all().filter(is_mvp=True)
+    mvp_managers = Manager.objects.all().filter(is_mvp=True)
 
     context = {
-        'realtors': realtors,
-        'mvp_realtors': mvp_realtors
+        'managers': managers,
+        'mvp_manager': mvp_managers
     }
 
     return render(request, 'pages/about.html', context)

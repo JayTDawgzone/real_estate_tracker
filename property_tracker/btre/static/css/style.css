@@ -66,8 +66,8 @@ img {
 #work {
   padding: 6rem 0; }
 
-.listing-preview a {
-  position: relative; }
+/* .listing-preview a {
+  position: relative; } */
 
 @media (max-width: 991px) {
   #showcase {
@@ -105,4 +105,22 @@ img {
 
 .navbar-dark {
   background-color: #000 !important;
+}
+
+.description-container {
+  padding: 10px;
+}
+
+/* Container holding the image and the text */
+.img-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
 }

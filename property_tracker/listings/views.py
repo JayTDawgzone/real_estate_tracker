@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from .choices import price_choices, bedroom_choices, state_choices
+from .choices import price_choices, bedroom_choices, state_choices, status_choices
 from listings.forms import MaintenanceForm
 from .models import Listing, Maintenance
 
@@ -60,7 +60,10 @@ def search(request):
   if 'keywords' in request.GET:
     keywords = request.GET['keywords']
     if keywords:
-      queryset_list = queryset_list.filter(description__icontains=keywords)
+        queryset_list = queryset_list.filter(description__icontains=keywords)
+        if not queryset_list:
+            queryset_list = queryset_list.filter(title__icontains=keywords)
+
 
   # City
   if 'city' in request.GET:
@@ -80,20 +83,24 @@ def search(request):
     if state:
       queryset_list = queryset_list.filter(state__iexact=state)
 
-  # Bedrooms
-  if 'bedrooms' in request.GET:
-    bedrooms = request.GET['bedrooms']
-    if bedrooms:
-      queryset_list = queryset_list.filter(bedrooms__lte=bedrooms)
+  # Status
+  if 'status' in request.GET:
+    status = request.GET['status']
+    if status:
+      queryset_list = queryset_list.filter(status__lte=status)
 
   # Price
   if 'price' in request.GET:
-    price = request.GET['price']
-    if price:
-      queryset_list = queryset_list.filter(price__lte=price)
+    if request.GET['price'] == 'Max Price (All)':
+        price = ''
+    else:
+        price = request.GET['price']
+        if price:
+          queryset_list = queryset_list.filter(price__lte=price)
 
   context = {
     'state_choices': state_choices,
+    'status_choices': status_choices,
     'bedroom_choices': bedroom_choices,
     'price_choices': price_choices,
     'listings': queryset_list,
