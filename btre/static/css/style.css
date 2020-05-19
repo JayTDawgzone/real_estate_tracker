@@ -1,0 +1,133 @@
+.btn-secondary {
+  color: #fff !important; }
+
+img {
+  width: 100%; }
+
+.logo {
+  width: 80px; }
+
+.navbar {
+  opacity: 0.9;
+  text-transform: uppercase; }
+
+.social a {
+  margin-right: 0.4rem; }
+
+#showcase {
+  background: url(../img/showcase.jpg) no-repeat top center fixed/cover;
+  position: relative;
+  min-height: 650px;
+  color: #fff;
+  padding-top: 6rem; }
+  #showcase .home-search {
+    min-height: 400px;
+    position: relative;
+    border-radius: 5px; }
+  #showcase .overlay {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 400px;
+    width: 100%;
+    background: rgba(51, 51, 51, 0.8); }
+
+#services {
+  background: url(../img/building.jpg) no-repeat top center fixed/cover;
+  min-height: 300px;
+  position: relative;
+  overflow: hidden; }
+  #services::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+    background: rgba(32, 134, 107, 0.8); }
+
+#showcase-inner {
+  background: url(../img/building.jpg) no-repeat top center fixed/cover;
+  position: relative;
+  overflow: hidden;
+  min-height: 100px; }
+  #showcase-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-height: 100%;
+    width: 100%;
+      background: rgba(150, 3, 25); }
+  #showcase-inner.showcase-search {
+    min-height: 100px; }
+
+#work {
+  padding: 6rem 0; }
+
+/* .listing-preview a {
+  position: relative; } */
+
+@media (max-width: 991px) {
+  #showcase {
+    padding-top: 4rem; }
+    #showcase h1 {
+      font-size: 40px; }
+  .hide-md-down {
+    display: none; } }
+
+@media (max-width: 768px) {
+  #showcase {
+    padding-top: 3rem; }
+    #showcase h1 {
+      font-size: 40px; }
+    #showcase p {
+      display: none; }
+  #top-bar {
+    text-align: center; }
+    #top-bar .social {
+      text-align: center !important; } }
+
+@media (max-width: 576px) {
+  #showcase h1 {
+    font-size: 30px; }
+  #showcase-inner h1 {
+    font-size: 40px; } }
+
+.admin-container {
+  background-color: #ededed;
+}
+
+.admin-list {
+  background-color: #ededed;
+}
+
+.navbar-dark {
+  background-color: #000 !important;
+}
+
+.description-container {
+  padding: 10px;
+}
+
+/* Container holding the image and the text */
+.img-container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+/* Bottom left text */
+.bottom-left {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+}
+
+/* Bottom left text */
+.top-left {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
