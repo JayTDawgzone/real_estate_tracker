@@ -131,3 +131,8 @@ img {
   top: 1rem;
   left: 1rem;
 }
+
+.home-images {
+  max-width: 100%;
+  max-height: 100%;
+}

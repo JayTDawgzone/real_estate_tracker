@@ -65,42 +65,42 @@
           <!-- Thumbnails -->
           <div class="row mb-5 thumbs">
             {% if listing.photo_1 %}
-            <div class="col-md-2">
+            <div class="col-2">
               <a href="{{ listing.photo_1.url }}" data-lightbox="home-images">
                 <img src="{{ listing.photo_1.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
             {% if listing.photo_2 %}
-            <div class="col-md-2">
+            <div class="col-2">
               <a href="{{ listing.photo_2.url }}" data-lightbox="home-images">
                 <img src="{{ listing.photo_2.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
             {% if listing.photo_3 %}
-            <div class="col-md-2">
+            <div class="col-2">
               <a href="{{ listing.photo_3.url }}" data-lightbox="home-images">
                 <img src="{{ listing.photo_3.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
             {% if listing.photo_4 %}
-            <div class="col-md-2">
+            <div class="col-2">
               <a href="{{ listing.photo_4.url }}" data-lightbox="home-images">
                 <img src="{{ listing.photo_4.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
             {% if listing.photo_5 %}
-            <div class="col-md-2">
+            <div class="col-2">
               <a href="{{ listing.photo_5.url }}" data-lightbox="home-images">
                 <img src="{{ listing.photo_5.url }}" alt="" class="img-fluid">
               </a>
             </div>
             {% endif %}
             {% if listing.photo_6 %}
-            <div class="col-md-2">
+            <div class="col-2">
               <a href="{{ listing.photo_6.url }}" data-lightbox="home-images">
                 <img src="{{ listing.photo_6.url }}" alt="" class="img-fluid">
               </a>
@@ -692,7 +692,7 @@
                       <h5 class="card-title"><span class="float-center">{{ item.title }}</span></h5>
                       <hr>
                       {% if item.maintenance_document %}
-                      <a type="button" class="btn btn-info" href="{{ item.expense_document.url }}">View Documents</a>
+                      <a type="button" class="btn btn-info" href="{{ item.maintenance_document.url }}">View Documents</a>
                       {% endif %}
                       <hr>
                       <div class="row">
@@ -788,6 +788,20 @@
         </div>
         <div class="col-md-3">
 
+          <div class="card mb-3">
+            <img class="card-img-top" src="{{ listing.manager.photo.url }}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">{{listing.manager.name}}</h5>
+              <h6 class="card-title">{{listing.manager.company_name}}</h6>
+              <p class="card-text">{{listing.manager.phone}}</p>
+              <p class="card-text">{{listing.manager.email}}</p>
+              {% if user.is_authenticated %}
+              <p class="card-text">{{listing.manager.address}}, {{listing.manager.city}}, {{listing.manager.state}} {{listing.manager.zip}}</p>
+              <p class="card-text">{{listing.manager.description}}</p>
+              {% endif %}
+            </div>
+          </div>
+
           {% if user.is_authenticated %}
 
           <div class="card mb-3">
@@ -820,7 +834,7 @@
 
               {% if listing.partner %}
               <h6 class='card-text'>Partner</h6>
-              <h6 class="text-secondary">${{ listing.partner }}</h6>
+              <h6 class="text-secondary">{{ listing.partner }}</h6>
               {% endif %}
 
               {% if listing.percent_ownership %}
@@ -832,6 +846,8 @@
 
             </div>
           </div>
+
+
         <button type="button" class="btn btn-lg btn-warning" onclick="CopyLink()">Copy Property Url</button>
         {% else %}
         <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
