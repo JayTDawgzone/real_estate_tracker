@@ -144,12 +144,12 @@ img {
 
 .card-img {
     width: 100%!important;
-    height:15vw!important;
+    height:300px!important;
     object-fit: cover;
 }
 
 .img-main {
     width: 100%!important;
-    height:300px!important;
+    height:30vw!important;
     object-fit: cover;
 }
