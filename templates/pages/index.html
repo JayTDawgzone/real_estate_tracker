@@ -16,6 +16,7 @@
           <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam
             voluptatum tempore! Consectetur, id commodi!</p>
           <div class="search">
+            {% if user.is_authenticated %}
             <form action="{% url 'search' %}">
               <!-- Form Row 1 -->
               <div class="form-row">
@@ -59,8 +60,81 @@
                   </select>
                 </div>
               </div>
-              <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+              <button class="btn btn-warning btn-block mt-4" type="submit">Submit form</button>
             </form>
+            {% else %}
+
+            <form action="{% url 'guest_search' %}">
+              <!-- Form Row 1 -->
+              <div class="form-row">
+                <div class="col-md-3 mb-3">
+                  <label class="sr-only">Keywords</label>
+                  <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Garage, etc)" value="{{ values.keywords }}">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                  <label class="sr-only">City</label>
+                  <input type="text" name="city" class="form-control" placeholder="City" value="{{ values.city }}">
+                </div>
+
+                <div class="col-md-3 mb-3">
+                  <label class="sr-only">Bedrooms</label>
+                  <select name="bedrooms" class="form-control">
+                    <option selected="true" disabled="disabled">Bedrooms (Any)</option>
+                    {% for key,value in bedroom_choices.items %}
+                        <option value="{{ key }}"
+                        {% if key == values.bedrooms %}
+                          selected
+                        {% endif %}
+                        >{{ value }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                  <label class="sr-only">State</label>
+                  <select name="state" class="form-control">
+                    <option selected="true" disabled="disabled">State (All)</option>
+                    {% for key,value in state_choices.items %}
+                        <option value="{{ key }}"
+                        {% if key == values.state %}
+                          selected
+                        {% endif %}
+                        >{{ value }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <!-- Form Row 2 -->
+              <div class="form-row">
+                <div class="col-md-6 mb-3">
+                  <select name="price" class="form-control">
+                    <option selected="true" disabled="disabled">Max Price (All)</option>
+                    {% for key,value in price_choices.items %}
+                        <option value="{{ key }}"
+                        {% if key == values.price %}
+                          selected
+                        {% endif %}
+                        >{{ value }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <select name="rent" class="form-control">
+                    <option selected="true" disabled="disabled">Max Rent (All)</option>
+                    {% for key,value in rent_choices.items %}
+                        <option value="{{ key }}"
+                        {% if key == values.rent %}
+                          selected
+                        {% endif %}
+                        >{{ value }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <button class="btn btn-warning btn-block mt-4" type="submit">Submit form</button>
+            </form>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -82,7 +156,7 @@
                     <img class="card-img" src="{{ listing.photo_main.url }}" alt="Card image">
                     <a href="{% url 'listing' listing.id %}" class='text-white'>
                     <div class="card-img-overlay d-flex flex-column">
-                        <div class="mt-auto"><h5>{{ listing.address }}, {{listing.city}}, {{ listing.state }}</h5></div>
+                        <div class="mt-auto img-main-text"><h5>{{ listing.address }}, {{listing.city}}, {{ listing.state }}</h5></div>
                     </div>
                     </a>
                 </div>

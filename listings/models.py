@@ -125,7 +125,7 @@ class Listing(models.Model):
   purchase_amt = models.IntegerField(blank=True, null=True)
   purchase_escrow_agent = models.CharField(max_length=200, blank=True)
   purchase_escrow_number = models.CharField(max_length=200, blank=True)
-  sold_date = models.DateField(default=datetime.now, blank=True)
+  sold_date = models.DateField(blank=True, null=True)
   sold_amt = models.IntegerField(blank=True, null=True)
   sale_escrow_agent = models.CharField(max_length=200, blank=True)
   sale_escrow_number = models.CharField(max_length=200, blank=True)

@@ -14,16 +14,16 @@ a:visited {
 }
 
 div.breadcrumbs {
-  background: #30caa0;
-  color: #10284e;
+  background: rgba(150, 3, 25);
+  color: #bdbebf;
 }
 
 div.breadcrumbs a {
-  color: #333;
+  color: #fff;
 }
 
 .module h2, .module caption, .inline-group h2 {
-  background: #30caa0;
+  background: rgba(150, 3, 25);
 }
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {

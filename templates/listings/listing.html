@@ -56,7 +56,7 @@
                 {% endif %}
               {% endif %}
             </div>
-            <div class="bottom-left">
+            <div class="bottom-left img-main-text">
               <h2>{{listing.address}}, {{ listing.city }}, {{ listing.state }} {{listing.zipcode}} </h2>
             </div>
           </div>
@@ -264,7 +264,7 @@
                      <div class="row">
 
 
-                     <div class="col-md-6">
+                     <div class="col-md-6 col-sm-12 col-xs-12">
                        <div class="card-body">
                          <h5 class="card-title">Monthly Rent: <span class="float-center">${{ item.rental_price }}</span></h5>
                          <hr>
@@ -277,7 +277,7 @@
                          {% endif %}
                        </div>
                      </div>
-                     <div class="col-md-6">
+                     <div class="col-md-6 col-sm-12 col-xs-12">
                        <div class="card-body">
                          <ul class="list-group list-group-flush">
                            {% if item.lease_start %}
@@ -356,7 +356,7 @@
                   <div class="row">
 
 
-                  <div class="col-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                       {% if item.insurance_company %}
                       <h5 class="card-title">Insurer: <span class="float-center">{{ item.insurance_company }}</span></h5>
                       <hr>
@@ -370,7 +370,7 @@
                       {% endif %}
 
                   </div>
-                  <div class="col-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                       <ul class="list-group list-group-flush">
                         {% if item.effective_date %}
                         <li class="list-group-item">Effective Date:
@@ -384,12 +384,12 @@
                         {% endif %}
                         {% if item.liability_amt %}
                         <li class="list-group-item">Liability Coverage:
-                          <span class="float-right">{{ item.liability_amt }}</span>
+                          <span class="float-right">${{ item.liability_amt }}</span>
                         </li>
                         {% endif %}
                         {% if item.replacement_amt %}
                         <li class="list-group-item">Replacement Coverage:
-                          <span class="float-right">{{ item.replacement_amt }}</span>
+                          <span class="float-right">${{ item.replacement_amt }}</span>
                         </li>
                         {% endif %}
                       </ul>
@@ -432,7 +432,7 @@
                   <div class="row">
 
 
-                  <div class="col-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
 
                       <h5 class="card-title">Lender: <span class="float-center">{{ item.lender }}</span></h5>
                       <hr>
@@ -451,7 +451,7 @@
                       {% endif %}
 
                   </div>
-                  <div class="col-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                       <ul class="list-group list-group-flush">
                         {% if item.loan_number %}
                         <li class="list-group-item">Loan Number:
@@ -506,7 +506,7 @@
                   <div class="row">
 
 
-                  <div class="col-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                     <h3>Acquistion</h3>
                     <ul class="list-group list-group-flush">
                       {% if listing.purchase_date %}
@@ -532,7 +532,7 @@
                     </ul>
 
                   </div>
-                  <div class="col-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                       <h3>Disposition</h3>
                       <ul class="list-group list-group-flush">
                         {% if listing.sold_date %}
@@ -597,7 +597,7 @@
                   <div class="row">
 
 
-                  <div class="col-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
 
                       <h5 class="card-title">Type: <span class="float-center">{{ item.get_expense_type_display }}</span></h5>
                       <hr>
@@ -606,7 +606,7 @@
                       {% endif %}
 
                   </div>
-                  <div class="col-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                       <ul class="list-group list-group-flush">
                         {% if item.vendor_name %}
                         <li class="list-group-item">Vendor Name:
@@ -687,7 +687,7 @@
                   <div class="row">
 
 
-                  <div class="col-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
 
                       <h5 class="card-title"><span class="float-center">{{ item.title }}</span></h5>
                       <hr>
@@ -699,7 +699,7 @@
 
 
                       {% if item.photo_1 %}
-                      <div class="col-md-2">
+                      <div class="col-md-6 col-sm-12 col-xs-12">
                         <a href="{{ item.photo_1.url }}" data-lightbox="home-images">
                           <img src="{{ item.photo_1.url }}" alt="" class="img-fluid">
                         </a>
@@ -743,7 +743,7 @@
                       </div>
 
                   </div>
-                  <div class="col-6">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
                       <ul class="list-group list-group-flush">
                         {% if item.repair_date %}
                         <li class="list-group-item">Date:

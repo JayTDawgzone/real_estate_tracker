@@ -9,6 +9,7 @@
     <div class="container">
       <div class="row text-center">
         <div class="col-md-12">
+          {% if user.is_authenticated %}
           <form action="{% url 'search' %}">
             <!-- Form Row 1 -->
             <div class="form-row">
@@ -71,6 +72,81 @@
             </div>
             <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
           </form>
+          {% else %}
+
+          <form action="{% url 'guest_search' %}">
+            <!-- Form Row 1 -->
+            <div class="form-row">
+              <div class="col-md-3 mb-3">
+                <label class="sr-only">Keywords</label>
+                <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Garage, etc)" value="{{ values.keywords }}">
+              </div>
+
+              <div class="col-md-3 mb-3">
+                <label class="sr-only">City</label>
+                <input type="text" name="city" class="form-control" placeholder="City" value="{{ values.city }}">
+              </div>
+
+              <div class="col-md-3 mb-3">
+                <label class="sr-only">Bedrooms</label>
+                <select name="bedrooms" class="form-control">
+                  <option selected="true" disabled="disabled">Bedrooms (Any)</option>
+                  {% for key,value in bedroom_choices.items %}
+                      <option value="{{ key }}"
+                      {% if key == values.bedrooms %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+
+              <div class="col-md-3 mb-3">
+                <label class="sr-only">State</label>
+                <select name="state" class="form-control">
+                  <option selected="true" disabled="disabled">State (All)</option>
+                  {% for key,value in state_choices.items %}
+                      <option value="{{ key }}"
+                      {% if key == values.state %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+            </div>
+            <!-- Form Row 2 -->
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <select name="price" class="form-control">
+                  <option selected="true" disabled="disabled">Max Price (All)</option>
+                  {% for key,value in price_choices.items %}
+                      <option value="{{ key }}"
+                      {% if key == values.price %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <select name="rent" class="form-control">
+                  <option selected="true" disabled="disabled">Max Rent (All)</option>
+                  {% for key,value in rent_choices.items %}
+                      <option value="{{ key }}"
+                      {% if key == values.rent %}
+                        selected
+                      {% endif %}
+                      >{{ value }}</option>
+                    {% endfor %}
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-warning btn-block mt-4" type="submit">Submit form</button>
+          </form>
+
+          {% endif %}
+
         </div>
       </div>
     </div>

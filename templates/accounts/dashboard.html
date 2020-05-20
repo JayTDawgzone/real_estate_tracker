@@ -29,6 +29,7 @@
     </div>
   </section>
 
+
   <!-- Alerts -->
   {% include 'partials/_alerts.html' %}
 
@@ -36,34 +37,96 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2>Welcome {{ user.first_name }}</h2>
-          {% if contacts %}
-            <p>Here are the property listings that you have inquired about</p>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Property</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {% for contact in contacts %}
-                  <tr>
-                    <td>{{ contact.id }}</td>
-                    <td>{{ contact.listing }}</td>
-                    <td>
-                      <a class="btn btn-light" href="{% url 'listing' contact.listing_id %}">View Listing</a>
-                    </td>
-                  </tr>
-                {% endfor %}
-              </tbody>
-            </table>
-          {% else %}
-            <p>You have not made any inquiries</p>
-          {% endif %}
+          <div class="container adminheader">
+            <h3>New Properties</h3>
+          </div>
+
+
         </div>
       </div>
     </div>
+
+  </section>
+
+  <section id="listings" class="py-5">
+    <div class="container">
+      <div class="row">
+        {% if listings %}
+          {% for listing in listings %}
+          <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card text-white">
+                    <img class="card-img" src="{{ listing.photo_main.url }}" alt="Card image">
+                    <a href="{% url 'listing' listing.id %}" class='text-white'>
+                    <div class="card-img-overlay d-flex flex-column">
+                        <div class="mt-auto img-main-text"><h5>{{ listing.address }}, {{listing.city}}, {{ listing.state }}</h5></div>
+                    </div>
+                    </a>
+                </div>
+                <div class="card">
+                <div class="card-body">
+                  <div class="listing-heading text-center">
+                    <h5 class="card-title text-primary">Asking Price: ${{listing.asking_price}}</h5>
+                    <h6 class="card-title text-primary">Target Rent: ${{listing.target_rent}}</h6>
+                  </div>
+                  <hr>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft }}</div>
+                    <div class="col-6">
+                      <i class="fas fa-car"></i> Garage: {{ listing.garage }}</div>
+                  </div>
+                  <div class="row py-2 text-secondary">
+                    <div class="col-6">
+                      <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}</div>
+                    <div class="col-6">
+                      <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}</div>
+                  </div>
+                  <hr>
+                  <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
+                </div>
+                </div>
+            </div>
+
+          {% endfor %}
+        {% else %}
+          <div class="col-md-12">
+            <p>No Listings Available</p>
+          </div>
+        {% endif %}
+
+      </div>
+    </div>
+  </section>
+
+  <section id="dashboard" class="py-4">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+          <div class="card">
+            <div class="card-header">
+              <h5>Non-Current Rentals</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              {% for item in properties %}
+              {% for x in item.rental.all %}
+              {% if x.rental_status == "2" %}
+              <li class="list-group-item"><a href="{% url 'listing' item.id %}">{{item.title}}</a><span class="badge badge-warning non-current-late float-right">Late</span></li>
+              {% elif x.rental_status == "3" %}
+              <li class="list-group-item"><a href="{% url 'listing' item.id %}">{{item.title}}</a><span class="badge badge-danger non-current-3day float-right">3-Day Notice</span></li>
+              {% elif x.rental_status == "4" %}
+              <li class="list-group-item"><a href="{% url 'listing' item.id %}">{{item.title}}</a><span class="badge badge-danger non-current-vacant float-right">Vacant</span></li>
+              {% elif x.rental_status == "5" %}
+              <li class="list-group-item"><a href="{% url 'listing' item.id %}">{{item.title}}</a><span class="badge badge-danger float-right non-current-evicting">Evicting</span></li>
+              {% endif %}
+              {% endfor %}
+              {% endfor %}
+            </ul>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
   </section>
   {% endblock %}

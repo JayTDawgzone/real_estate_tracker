@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from contacts.models import Contact
+from listings.models import Listing
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 def register(request):
   if request.method == 'POST':
@@ -63,9 +65,16 @@ def logout(request):
     return redirect('index')
 
 def dashboard(request):
-  user_contacts = Contact.objects.order_by('-contact_date').filter(user_id=request.user.id)
+    listings = Listing.objects.order_by('-list_date').filter(is_published=True)
 
-  context = {
-    'contacts': user_contacts
-  }
-  return render(request, 'listings/properties.html')
+    paginator = Paginator(listings, 3)
+    page = request.GET.get('page')
+    paged_listings = paginator.get_page(page)
+
+    context = {
+      'listings': paged_listings,
+      'properties': listings
+    }
+
+
+    return render(request, 'accounts/dashboard.html', context)
