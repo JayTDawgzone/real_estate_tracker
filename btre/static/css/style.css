@@ -150,6 +150,6 @@ img {
 
 .img-main {
     width: 100%!important;
-    height:30vw!important;
+    height:300px!important;
     object-fit: cover;
 }
