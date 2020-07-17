@@ -27,13 +27,13 @@ STATUS = (
 )
 
 EXPENSETYPE = (
-    ('1', 'Electric'),
-    ('2', 'Gas'),
-    ('3', 'Water'),
-    ('4', 'Garbage'),
-    ('5', 'HOA'),
-    ('5', 'Sewer'),
-    ('6', 'Other')
+    ('Electric', 'Electric'),
+    ('Gas', 'Gas'),
+    ('Water', 'Water'),
+    ('Garbage', 'Garbage'),
+    ('HOA', 'HOA'),
+    ('Sewer', 'Sewer'),
+    ('Other', 'Other')
 )
 
 RECURRENCE = (
@@ -220,6 +220,7 @@ class Expense(models.Model):
     listing = models.ForeignKey(Listing, default=None, on_delete=models.DO_NOTHING, related_name='expense')
     expense_type = models.CharField(max_length=20, choices=EXPENSETYPE, default='6')
     vendor_name = models.CharField(max_length=200, blank=True)
+    annual_pmt = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     autopay = models.CharField(max_length=20, choices=YESNO, default='1')
     responsibility = models.CharField(max_length=7, choices=RESPONSIBILITY, default='1')
     expense_notes = models.TextField(blank=True)

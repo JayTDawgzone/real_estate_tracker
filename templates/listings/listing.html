@@ -230,8 +230,109 @@
 
            <!-- Rental Information -->
            {% if user.is_authenticated %}
+
+           <div class="card mb-5">
+             <div class="card-body">
+               <h2 class='card-title'>Net Operating Income</h2>
+               <hr>
+               <div class="row noi-row">
+                 <div class="col-6">
+                   {% if listing.purchase_amt %}
+                     <h5>Purchase Price: $<span id='price'>{{listing.purchase_amt}}</span></h5>
+                   {% endif %}
+                 </div>
+                 <div class="col-6">
+                   {% if listing.target_rent %}
+                     <h5>Target Rent: $<span id='rent'>{{listing.target_rent}}</span></h5>
+                   {% endif %}
+                 </div>
+               </div>
+               <div class="row noi-row">
+
+                 <div class="col-12">
+                   <h3>Expenses</h3>
+                 </div>
+
+                 <hr>
+                 <div class="col-8">
+                   <table class="table table-dark text-white" id='expense-table'>
+                      <thead>
+                        <tr>
+                          <th scope="col">Type</th>
+                          <th scope="col">Monthly</th>
+                          <th scope="col">Annual</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% if listing.property_tax %}
+                        <tr>
+                          <td>Property Tax</td>
+                          <td id='prop_tax_monthly'>${% widthratio listing.property_tax 12 1|floatformat:"0" %}</td>
+                          <td id='prop_tax_annually'>${{ listing.property_tax|floatformat:"0" }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if listing.insurance %}
+                        {% for item in listing.insurance.all %}
+                        <tr>
+                          <td>Insurance</td>
+                          <td id='insurance_monthly'>${% widthratio item.annual_pmt 12 1|floatformat:"0" %}</td>
+                          <td id='insurance_annually'>${{ item.annual_pmt|floatformat:"0" }}</td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                        {% if listing.expense.all %}
+                        {% for item in listing.expense.all %}
+                        {% if item.responsibility == '1' %}
+                        <tr>
+                          <td>{{ item.expense_type }}</td>
+                          <td id='expenses_monthly'>${% widthratio item.annual_pmt 12 1|floatformat:"0" %}</td>
+                          <td id='expenses_annually'>${{ item.annual_pmt|floatformat:"0" }}</td>
+                        </tr>
+                        {% endif %}
+                        {% endfor %}
+                        {% endif %}
+
+
+
+                      </tbody>
+                    </table>
+                 </div>
+                 <hr>
+                 <div class="col-12">
+                   <h3>NOI</h3>
+                 </div>
+                 <div class="col-6">
+                   <table class="table table-dark">
+                      <thead>
+                        <tr>
+                          <th scope="col">Monthly</th>
+                          <th scope="col">Annual</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td id='noi-1'></td>
+                          <td id='noi-2'></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                 </div>
+                 <hr>
+                 <div class="col-12">
+                   <h3>CAP Rate: <span id='cap-rate'></span></h3>
+                 </div>
+
+
+               </div>
+
+             </div>
+           </div>
            {% if listing.rental %}
            {% for item in listing.rental.all %}
+
+
+
+
 
 
              <div id="accordion">
