@@ -1,6 +1,24 @@
 # real_estate_tracker
 A tool for tracking real estate and rental properties.
 
+#### Requirements:
+
+* Django==2.2.4
+* django-environ==0.4.5
+* Pillow==7.1.2
+* psycopg2==2.8.5
+* psycopg2-binary==2.8.5
+* pytz==2020.1
+* sqlparse==0.3.1
+
+#### How to run:
+1. Create a virtual enviroment and activate it
+2. Activate the environment and install requirements.txt
+3. Run ```python manage.py runserver```
+
+
+
+
 ### Summary
 
 This Django application was designed for a real-estate investor that wanted a tool to manage their many properties and share them with potential buyers.
