@@ -236,16 +236,87 @@
                <h2 class='card-title'>Net Operating Income</h2>
                <hr>
                <div class="row noi-row">
+                 <div class="col-12">
+                   <h3>Purchase Details</h3>
+                 </div>
+                 <hr>
                  <div class="col-6">
                    {% if listing.purchase_amt %}
                      <h5>Purchase Price: $<span id='price'>{{listing.purchase_amt}}</span></h5>
                    {% endif %}
                  </div>
                  <div class="col-6">
-                   {% if listing.target_rent %}
-                     <h5>Target Rent: $<span id='rent'>{{listing.target_rent}}</span></h5>
+                   {% if listing.purchase_escrow_agent %}
+                     <h5>Escrow Agent: <span>{{listing.purchase_escrow_agent}}</span></h5>
                    {% endif %}
                  </div>
+               </div>
+               <div class="row noi-row">
+                 <div class="col-6">
+                   {% if listing.purchase_date %}
+                     <h5>Purchase Date: <span>{{listing.purchase_date}}</span></h5>
+                   {% endif %}
+                 </div>
+                 <div class="col-6">
+                   {% if listing.purchase_escrow_number %}
+                     <h5>Escrow Number: <span>{{listing.purchase_escrow_number}}</span></h5>
+                   {% endif %}
+                 </div>
+               </div>
+               <div class="row noi-row">
+                 <div class="col-12">
+                   <h3>Sale Details</h3>
+                 </div>
+                 <hr>
+                 <div class="col-6">
+                   {% if listing.sold_amt %}
+                     <h5>Sale Price: $<span>{{listing.sold_amt}}</span></h5>
+                   {% endif %}
+                 </div>
+                 <div class="col-6">
+                   {% if listing.sold_date %}
+                     <h5>Escrow Agent: <span>{{listing.sale_escrow_agent}}</span></h5>
+                   {% endif %}
+                 </div>
+               </div>
+               <div class="row noi-row">
+                 <div class="col-6">
+                   {% if listing.purchase_date %}
+                     <h5>Sale Date: <span>{{listing.sold_date}}</span></h5>
+                   {% endif %}
+                 </div>
+                 <div class="col-6">
+                   {% if listing.sale_escrow_number %}
+                     <h5>Escrow Number: <span>{{listing.sale_escrow_number}}</span></h5>
+                   {% endif %}
+                 </div>
+               </div>
+               <div class="row noi-row">
+                 <div class="col-12">
+                   <h3>Rent</h3>
+                 </div>
+                 <div class="col-6">
+                   <table class="table table-dark">
+                      <thead>
+                        <tr>
+                          <th scope="col">Monthly</th>
+                          <th scope="col">Annual</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          {% if listing.target_rent %}
+                          <td>$<span id='rent'>{{listing.target_rent}}</span></td>
+                          <td>${% widthratio listing.target_rent 1 12 %}</td>
+                          {% else %}
+                          <td>$0</td>
+                          <td>$0</td>
+                          {% endif %}
+                        </tr>
+                      </tbody>
+                    </table>
+                 </div>
+
                </div>
                <div class="row noi-row">
 
@@ -587,91 +658,7 @@
           {% endif %}
           {% endif %}
 
-          <!-- Acquisition and Disposition -->
-          {% if user.is_authenticated %}
-          {% if listing.purchase_amt %}
 
-
-            <div id="accordion">
-              <div class="card">
-                <div class="card-header" id="headingSix">
-                  <h5 class="mb-0">
-                    Acquistion & Dispostion
-                    <button class="btn btn-warning float-right" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
-                      Show
-                    </button>
-                  </h5>
-                </div>
-                <div id="collapseSix" class="collapse hide" aria-labelledby="headingSix" data-parent="#accordion">
-                <div class="card-body">
-                  <div class="row">
-
-
-                  <div class="col-md-6 col-sm-12 col-xs-12">
-                    <h3>Acquistion</h3>
-                    <ul class="list-group list-group-flush">
-                      {% if listing.purchase_date %}
-                      <li class="list-group-item">Purchase Date:
-                        <span class="float-right">{{ listing.purchase_date|date:'M-d-Y'  }}</span>
-                      </li>
-                      {% endif %}
-                      {% if listing.purchase_amt %}
-                      <li class="list-group-item">Purchase Amount:
-                        <span class="float-right">${{ listing.purchase_amt }}</span>
-                      </li>
-                      {% endif %}
-                      {% if listing.purchase_escrow_agent %}
-                      <li class="list-group-item">Escrow Agent:
-                        <span class="float-right">{{ listing.purchase_escrow_agent }}</span>
-                      </li>
-                      {% endif %}
-                      {% if listing.purchase_escrow_number %}
-                      <li class="list-group-item">Escrow Number:
-                        <span class="float-right">{{ listing.purchase_escrow_number }}</span>
-                      </li>
-                      {% endif %}
-                    </ul>
-
-                  </div>
-                  <div class="col-md-6 col-sm-12 col-xs-12">
-                      <h3>Disposition</h3>
-                      <ul class="list-group list-group-flush">
-                        {% if listing.sold_date %}
-                        <li class="list-group-item">Sale Date:
-                          <span class="float-right">{{ listing.sold_date|date:'M-d-Y' }}</span>
-                        </li>
-                        {% endif %}
-                        {% if listing.sale_amt %}
-                        <li class="list-group-item">Sale Amount:
-                          <span class="float-right">${{ listing.sale_amt }}</span>
-                        </li>
-                        {% endif %}
-                        {% if listing.sale_escrow_agent %}
-                        <li class="list-group-item">Escrow Agent:
-                          <span class="float-right">{{ listing.sale_escrow_agent }}</span>
-                        </li>
-                        {% endif %}
-                        {% if listing.sale_escrow_number %}
-                        <li class="list-group-item">Escrow Number:
-                          <span class="float-right">{{ listing.sale_escrow_number }}</span>
-                        </li>
-                        {% endif %}
-                      </ul>
-                  </div>
-                  </div>
-                </div>
-                      {% if item.insurance_notes %}
-                      <div class="card-body">
-                        <p class="card-text">{{ item.insurance_notes }}</p>
-                      </div>
-                      {% endif %}
-                  </div>
-                </div>
-              </div>
-
-              <hr>
-          {% endif %}
-          {% endif %}
 
 
           <!-- Expense Information -->
@@ -903,55 +890,10 @@
             </div>
           </div>
 
-          {% if user.is_authenticated %}
-
-          <div class="card mb-3">
-            <div class="card-body">
-              <h3 class="card-title">Property Value</h3>
-              {% if listing.purchase_date %}
-              <h6 class='card-text'>Purchase Date</h6>
-              <h6 class="text-secondary">{{ listing.purchase_date }}</h6>
-              {% endif %}
-
-              {% if listing.purchase_amt %}
-              <h6 class='card-text'>Purchase Amount</h6>
-              <h6 class="text-secondary">${{ listing.purchase_amt|intcomma }}</h6>
-              {% endif %}
-
-              {% if listing.assessed_value %}
-              <h6 class='card-text'>Assessed Value</h6>
-              <h6 class="text-secondary">${{ listing.assessed_value|intcomma }}</h6>
-              {% endif %}
-
-              {% if listing.current_value %}
-              <h6 class='card-text'>Current Value</h6>
-              <h6 class="text-secondary">${{ listing.current_value|intcomma }}</h6>
-              {% endif %}
-
-              {% if listing.owned_equity %}
-              <h6 class='card-text'>Owned Equity</h6>
-              <h6 class="text-secondary">${{ listing.owned_equity|intcomma }}</h6>
-              {% endif %}
-
-              {% if listing.partner %}
-              <h6 class='card-text'>Partner</h6>
-              <h6 class="text-secondary">{{ listing.partner }}</h6>
-              {% endif %}
-
-              {% if listing.percent_ownership %}
-              <h6 class='card-text'>Percent Ownership</h6>
-              <h6 class="text-secondary">{{ listing.percent_ownership }}%</h6>
-              {% endif %}
-
-
-
-            </div>
-          </div>
-
-
+        {% if user.is_authenticated %}
         <button type="button" class="btn btn-lg btn-warning" onclick="CopyLink()">Copy Property Url</button>
         {% else %}
-        <button class="btn-primary btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
+        <button class="btn-warning btn-block btn-lg" data-toggle="modal" data-target="#inquiryModal">Make An Inquiry</button>
         {% endif %}
         </div>
       </div>

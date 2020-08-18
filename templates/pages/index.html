@@ -11,10 +11,9 @@
       <div class="home-search p-5">
         <div class="overlay p-5">
           <h1 class="display-4 mb-4">
-            Property Searching Just Got So Easy
+            Property Search
           </h1>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Recusandae quas, asperiores eveniet vel nostrum magnam
-            voluptatum tempore! Consectetur, id commodi!</p>
+          <p class="lead"></p>
           <div class="search">
             {% if user.is_authenticated %}
             <form action="{% url 'search' %}">
@@ -60,7 +59,7 @@
                   </select>
                 </div>
               </div>
-              <button class="btn btn-warning btn-block mt-4" type="submit">Submit form</button>
+              <button class="btn btn-warning btn-block mt-4" type="submit">Submit</button>
             </form>
             {% else %}
 
@@ -132,7 +131,7 @@
                   </select>
                 </div>
               </div>
-              <button class="btn btn-warning btn-block mt-4" type="submit">Submit form</button>
+              <button class="btn btn-warning btn-block mt-4" type="submit">Submit</button>
             </form>
             {% endif %}
           </div>
@@ -188,7 +187,8 @@
           {% endfor %}
         {% else %}
           <div class="col-md-12">
-            <p>No Listings Available</p>
+            <h4>No properties currently available to view.</h4>
+            <p>For more information, please call 555-1234.</p>
           </div>
         {% endif %}
 
@@ -203,22 +203,22 @@
           <i class="fas fa-comment fa-4x mr-4"></i>
           <hr>
           <h3>Consulting Services</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
+          <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+            hic dignissimos ratione ea quae.</p> -->
         </div>
         <div class="col-md-4">
           <i class="fas fa-home fa-4x mr-4"></i>
           <hr>
           <h3>Propery Management</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
+          <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+            hic dignissimos ratione ea quae.</p> -->
         </div>
         <div class="col-md-4">
           <i class="fas fa-suitcase fa-4x mr-4"></i>
           <hr>
           <h3>Renting & Selling</h3>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
-            hic dignissimos ratione ea quae.</p>
+          <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt, debitis nam! Repudiandae, provident iste consequatur
+            hic dignissimos ratione ea quae.</p> -->
         </div>
       </div>
     </div>
