@@ -5,16 +5,7 @@
 {% block title %} | Browse Property Listings {% endblock %}
 
 {% block content %}
-<section id="showcase-inner" class="py-5 text-white">
-    <div class="container">
-      <div class="row text-center">
-        <div class="col-md-12">
-          <h1 class="display-4">Browse Our Properties</h1>
-          <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sunt, pariatur!</p>
-        </div>
-      </div>
-    </div>
-  </section>
+
 
   <!-- Breadcrumb -->
   <section id="bc" class="mt-3">
@@ -49,21 +40,25 @@
                 <div class="card">
                 <div class="card-body">
                   <div class="listing-heading text-center">
-                    <h5 class="card-title text-primary">Asking Price: ${{listing.asking_price|intcomma}}</h5>
-                    <h6 class="card-title text-primary">Target Rent: ${{listing.target_rent|intcomma}}</h6>
+                    {% if listing.sales_price %}
+                    <h5 class="card-title text-primary">Price: ${{listing.sales_price|intcomma}}</h5>
+                    {% endif %}
+                    {% if listing.target_rent %}
+                    <h6 class="card-title text-primary">Rent: ${{listing.target_rent|intcomma}}</h6>
+                    {% endif %}
                   </div>
                   <hr>
                   <div class="row py-2 text-secondary">
                     <div class="col-6">
-                      <i class="fas fa-th-large"></i> Sqft: {{ listing.sqft|intcomma }}</div>
+                      <i class="fas fa-th-large text-secondary"></i> Sqft: {{ listing.sqft|intcomma }}</div>
                     <div class="col-6">
-                      <i class="fas fa-car"></i> Garage: {{ listing.garage }}</div>
+                      <i class="fas fa-car text-secondary"></i> Garage: {{ listing.garage }}</div>
                   </div>
                   <div class="row py-2 text-secondary">
                     <div class="col-6">
-                      <i class="fas fa-bed"></i> Bedrooms: {{ listing.bedrooms }}</div>
+                      <i class="fas fa-bed text-secondary"></i> Bedrooms: {{ listing.bedrooms }}</div>
                     <div class="col-6">
-                      <i class="fas fa-bath"></i> Bathrooms: {{ listing.bathrooms }}</div>
+                      <i class="fas fa-bath text-secondary"></i> Bathrooms: {{ listing.bathrooms }}</div>
                   </div>
                   <hr>
                   <a href="{% url 'listing' listing.id %}" class="btn btn-warning btn-block">More Info</a>

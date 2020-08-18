@@ -145,7 +145,7 @@ def guest_search(request):
   if 'price' in request.GET:
     price = request.GET['price']
     if price:
-        queryset_list = queryset_list.filter(asking_price__lte=price)
+        queryset_list = queryset_list.filter(sales_price__lte=price)
 
   # Rent
   if 'rent' in request.GET:

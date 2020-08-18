@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from .models import Listing, Maintenance, Rental, Insurance, Expense, Mortgage
+from .models import Listing, Maintenance, Rental, Insurance, Expense, Mortgage, AcquisitionDisposition
 
 class ListingAdmin(admin.ModelAdmin):
-  list_display = ('id', 'title', 'is_published', 'status', 'type','city', 'state', 'asking_price', 'list_date', 'manager')
+  list_display = ('id', 'title', 'is_published', 'status', 'type','city', 'state', 'sales_price', 'list_date', 'manager')
   list_display_links = ('id', 'title')
   list_filter = ('status','city','state', 'type')
-  list_editable = ('is_published','status', 'asking_price')
-  search_fields = ('title', 'description', 'address', 'city', 'state', 'zipcode', 'asking_price')
+  list_editable = ('is_published','status', 'sales_price')
+  search_fields = ('title', 'description', 'address', 'city', 'state', 'zipcode', 'sales_price')
   list_per_page = 25
 
 class MaintenanceAdmin(admin.ModelAdmin):
@@ -44,6 +44,12 @@ class MortgageAdmin(admin.ModelAdmin):
     list_filter = ('listing', 'lender')
     list_per_page = 25
 
+class AcquisitionDispositionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'listing', 'title', 'date')
+    list_display_links = ('id', 'listing',)
+    list_filter = ('listing', 'date')
+    list_per_page = 25
+
 
 admin.site.register(Listing, ListingAdmin)
 admin.site.register(Maintenance, MaintenanceAdmin)
@@ -51,3 +57,4 @@ admin.site.register(Rental, RentalAdmin)
 admin.site.register(Insurance, InsuranceAdmin)
 admin.site.register(Expense, ExpenseAdmin)
 admin.site.register(Mortgage, MortgageAdmin)
+admin.site.register(AcquisitionDisposition, AcquisitionDispositionAdmin)

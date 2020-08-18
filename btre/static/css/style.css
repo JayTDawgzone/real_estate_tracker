@@ -38,11 +38,11 @@ img {
     left: 0;
     min-height: 400px;
     width: 100%;
-    background: #9A9A9A; }
+    background: #10284e; }
 
 #services {
   background: url(../img/building.jpg) no-repeat top center fixed/cover;
-  min-height: 300px;
+  /* min-height: 300px; */
   position: relative;
   overflow: hidden; }
   #services::before {
@@ -52,7 +52,7 @@ img {
     left: 0;
     min-height: 100%;
     width: 100%;
-    background-color: rgba(150, 3, 25); }
+    background-color: #10284e; }
 
 #showcase-inner {
   background: url(../img/building.jpg) no-repeat top center fixed/cover;
@@ -158,11 +158,30 @@ img {
 }
 
 .img-main-text {
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 2px;
+}
+
+.img-main-text-listing {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 2px;
+
 }
 
 .adminheader {
-  background-color: #e9ecef;
+  background-color: #1b4488;
   border-radius: 0.25rem;
 }
 
@@ -184,4 +203,16 @@ img {
 
 .table-bold {
   font-weight: bold;
+}
+
+.fas {
+  color: rgba(150, 3, 25);
+}
+
+.breadcrumb  {
+  background-color: #fff ;
+}
+
+.user-dashboard-header {
+  color: rgba(150, 3, 25);
 }

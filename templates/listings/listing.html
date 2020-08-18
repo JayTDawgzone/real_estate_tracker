@@ -56,12 +56,14 @@
                 {% endif %}
               {% endif %}
             </div>
-            <div class="card-img-overlay d-flex flex-column">
-                <div class="mt-auto img-main-text"><h5>{{ listing.address }}, {{listing.city}}, {{ listing.state }}</h5></div>
-            </div>
+
             <!-- <div class="bottom-left img-main-text">
               <h2>{{listing.address}}, {{ listing.city }}, {{ listing.state }} {{listing.zipcode}} </h2>
             </div> -->
+          </div>
+
+          <div class="row">
+            <h2>{{ listing.address }}, {{listing.city}}, {{ listing.state }}</h2>
           </div>
 
 
@@ -112,8 +114,26 @@
           </div>
           <!-- Asking Price -->
           <div class="text-center">
-            <h2>Asking Price: ${{ listing.asking_price|intcomma }}</h2>
-            <h3>Target Rent: ${{ listing.target_rent|intcomma }}</h3>
+            {% if user.is_authenticated %}
+
+            {% if listing.purchase_amt %}
+            <h2>Purchase Price: ${{ listing.purchase_amt|intcomma }}</h2>
+            {% endif %}
+
+            {% else %}
+
+            {% if listing.sales_price%}
+            <h2>Price: ${{ listing.sales_price|intcomma }}</h2>
+            {% endif %}
+
+            {% endif %}
+
+
+            {% if listing.target_rent %}
+            <h3>Rent: ${{ listing.target_rent|intcomma }}</h3>
+            {% endif %}
+
+
           </div>
           <br>
 
@@ -232,12 +252,13 @@
 <!-- ADMIN ONLY SECTION  -->
 
            <!-- Rental Information -->
-           {% if user.is_authenticated %}
+
 
            <div class="card mb-5">
              <div class="card-body">
                <h2 class='card-title'>Net Operating Income</h2>
                <hr>
+               {% if user.is_authenticated %}
                <div class="row noi-row">
                  <div class="col-12">
                    <h5>Purchase Details</h5>
@@ -350,7 +371,7 @@
                      <li class="list-group-item text-secondary">
                        {% if listing.owned_equity %}
                        Owned Equity:
-                       <span class="float-right">{{ listing.owned_equity }}%</span>
+                       <span class="float-right">${{ listing.owned_equity }}</span>
                        {% endif %}
                      </li>
                      <li class="list-group-item text-secondary">
@@ -362,7 +383,7 @@
                      <li class="list-group-item text-secondary">
                        {% if listing.percent_ownership %}
                        Percent Ownership:
-                       <span class="float-right">{{ listing.percent_ownership }}</span>
+                       <span class="float-right">{{ listing.percent_ownership }}%</span>
                        {% endif %}
                      </li>
                    </ul>
@@ -370,6 +391,19 @@
 
 
                </div>
+               {% else %}
+               <div class="row noi-row">
+                 <div class="col-12">
+                   <h3>Sales Price: $<span id='price'>{{listing.sales_price}}</span></h3>
+                 </div>
+                 <hr>
+
+
+                 </div>
+
+
+
+               {% endif %}
 
 
 
@@ -444,7 +478,7 @@
                         </tr>
                         {% endif %}
                         {% endfor %}
-                        {% endif %}
+            {% endif %}
 
 
 
@@ -481,6 +515,9 @@
 
              </div>
            </div>
+
+
+           {% if user.is_authenticated %}
            {% if listing.rental %}
            {% for item in listing.rental.all %}
 
@@ -953,6 +990,90 @@
 
           {% endif %}
           {% endif %}
+
+
+          <!-- Document Information -->
+          {% if user.is_authenticated %}
+          {% if listing.acquisition_disposition.all %}
+
+
+
+            <div id="accordion">
+              <div class="card">
+                <div class="card-header" id="headingSix">
+                  <h5 class="mb-0">
+                    Documents
+                    <span class="badge badge-primary float-center">{{ listing.acquisition_disposition.count }}</span>
+                    <button class="btn btn-warning float-right" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
+                      Show
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapseSix" class="collapse hide" aria-labelledby="headingSix" data-parent="#accordion">
+                  {% for item in listing.acquisition_disposition.all %}
+                <div class="card-body">
+                    <ul class="list-group list-group-flush">
+                      {% if item.title %}
+                      <a href="{{ item.document1.url }}">
+                      <li class="list-group-item">{{ item.title }} <span class="badge badge-warning float-center">1</span>
+                        <span class="float-right">{{ item.date|date:'M-d-Y' }}</span>
+                      </li>
+                      </a>
+                      {% if item.document2 %}
+                      <a href="{{ item.document2.url }}">
+                      <li class="list-group-item">{{ item.title }} <span class="badge badge-warning float-center">2</span>
+                        <span class="float-right">{{ item.date|date:'M-d-Y' }}</span>
+                      </li>
+                      </a>
+                      {% endif %}
+
+                      {% if item.document3 %}
+                      <a href="{{ item.document2.url }}">
+                      <li class="list-group-item">{{ item.title }} <span class="badge badge-warning float-center">3</span>
+                        <span class="float-right">{{ item.date|date:'M-d-Y' }}</span>
+                      </li>
+                      </a>
+                      {% endif %}
+
+                      {% if item.document4 %}
+                      <a href="{{ item.document2.url }}">
+                      <li class="list-group-item">{{ item.title }} <span class="badge badge-warning float-center">4</span>
+                        <span class="float-right">{{ item.date|date:'M-d-Y' }}</span>
+                      </li>
+                      </a>
+                      {% endif %}
+
+                      {% if item.document5 %}
+                      <a href="{{ item.document2.url }}">
+                      <li class="list-group-item">{{ item.title }} <span class="badge badge-warning float-center">5</span>
+                        <span class="float-right">{{ item.date|date:'M-d-Y' }}</span>
+                      </li>
+                      </a>
+                      {% endif %}
+
+                      {% endif %}
+                    </ul>
+
+
+                </div>
+
+
+
+
+
+              {% endfor %}
+                  </div>
+                </div>
+              </div>
+
+              <hr>
+
+          {% endif %}
+          {% endif %}
+
+
+
+
 
           <!-- Description -->
 

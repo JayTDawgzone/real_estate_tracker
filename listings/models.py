@@ -100,8 +100,8 @@ class Listing(models.Model):
   ac = models.CharField(max_length=3, choices=YESNO, default=2)
   heating = models.CharField(max_length=3, choices=YESNO, default=2)
   water_heater = models.CharField(max_length=3, choices=YESNO, default=2)
-  target_rent = models.IntegerField()
-  asking_price = models.IntegerField()
+  target_rent = models.IntegerField(blank=True, null=True)
+  sales_price = models.IntegerField(blank=True, null=True)
   bedrooms = models.IntegerField()
   bathrooms = models.DecimalField(max_digits=2, decimal_places=1, default=1)
   stories = models.DecimalField(max_digits=2, decimal_places=1, default=1)
@@ -142,7 +142,7 @@ class Listing(models.Model):
 
   class Meta:
       verbose_name = "Property"
-      verbose_name_plural = "Properties"
+      verbose_name_plural = "1. Properties"
 
   def __str__(self):
     return self.title
@@ -168,7 +168,7 @@ class Maintenance(models.Model):
 
     class Meta:
         verbose_name = "Maintenance Job"
-        verbose_name_plural = "Maintenance Jobs"
+        verbose_name_plural = "5. Maintenance Jobs"
 
 
 class Rental(models.Model):
@@ -192,7 +192,26 @@ class Rental(models.Model):
 
     class Meta:
       verbose_name = "Lease"
-      verbose_name_plural = "Leases"
+      verbose_name_plural = "2. Leases"
+
+
+class AcquisitionDisposition(models.Model):
+    listing = models.ForeignKey(Listing, default=None, on_delete=models.DO_NOTHING, related_name='acquisition_disposition')
+    title = models.CharField(max_length=200)
+    document1  = models.FileField(upload_to='documents/%Y/%m/%d/')
+    document2  = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True)
+    document3  = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True)
+    document4  = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True)
+    document5  = models.FileField(upload_to='documents/%Y/%m/%d/', blank=True)
+    description = models.TextField(blank=True)
+    date = models.DateField(default=datetime.now, blank=True)
+
+    def __str__(self):
+        return self.listing.title + ": " + self.title
+
+    class Meta:
+      verbose_name = "Acquisition Disposition"
+      verbose_name_plural = "6. Acquisition Disposition"
 
 
 
@@ -213,7 +232,7 @@ class Insurance(models.Model):
 
     class Meta:
       verbose_name = "Insurance Policy"
-      verbose_name_plural = "Insurance Policies"
+      verbose_name_plural = "3. Insurance Policies"
 
 
 class Expense(models.Model):
@@ -230,6 +249,10 @@ class Expense(models.Model):
     def __str__(self):
         return self.listing.title + ": " + self.vendor_name
 
+    class Meta:
+      verbose_name = "Expense"
+      verbose_name_plural = "4. Expenses"
+
 class Mortgage(models.Model):
     listing = models.ForeignKey(Listing, default=None, on_delete=models.DO_NOTHING, related_name='mortgage')
     loan_number = models.CharField(max_length=200, blank=True)
@@ -242,5 +265,9 @@ class Mortgage(models.Model):
 
     def __str__(self):
         return self.lender + " " + self.loan_number
+
+    class Meta:
+      verbose_name = "Mortgage"
+      verbose_name_plural = "7. Mortgages"
 
 ## PROPERTY

@@ -14,12 +14,12 @@ a:visited {
 }
 
 div.breadcrumbs {
-  background: rgba(150, 3, 25);
-  color: #bdbebf;
+  background: #fff;
+  color: #10284e;
 }
 
 div.breadcrumbs a {
-  color: #fff;
+  color: rgba(150, 3, 25);
 }
 
 .module h2, .module caption, .inline-group h2 {
