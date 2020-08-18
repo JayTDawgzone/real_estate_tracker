@@ -177,3 +177,11 @@ img {
 .non-current-evicting {
   background-color: rgba(150, 3, 25)!important;
 }
+
+.noi-list-group {
+  font-size: 1em;
+}
+
+.table-bold {
+  font-weight: bold;
+}

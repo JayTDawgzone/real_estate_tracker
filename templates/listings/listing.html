@@ -56,9 +56,12 @@
                 {% endif %}
               {% endif %}
             </div>
-            <div class="bottom-left img-main-text">
-              <h2>{{listing.address}}, {{ listing.city }}, {{ listing.state }} {{listing.zipcode}} </h2>
+            <div class="card-img-overlay d-flex flex-column">
+                <div class="mt-auto img-main-text"><h5>{{ listing.address }}, {{listing.city}}, {{ listing.state }}</h5></div>
             </div>
+            <!-- <div class="bottom-left img-main-text">
+              <h2>{{listing.address}}, {{ listing.city }}, {{ listing.state }} {{listing.zipcode}} </h2>
+            </div> -->
           </div>
 
 
@@ -237,68 +240,148 @@
                <hr>
                <div class="row noi-row">
                  <div class="col-12">
-                   <h3>Purchase Details</h3>
+                   <h5>Purchase Details</h5>
                  </div>
                  <hr>
                  <div class="col-6">
-                   {% if listing.purchase_amt %}
-                     <h5>Purchase Price: $<span id='price'>{{listing.purchase_amt}}</span></h5>
-                   {% endif %}
+                   <ul class="list-group list-group-flush noi-list-group">
+                     <li class="list-group-item text-secondary">
+                       {% if listing.purchase_amt %}
+                       Purchase Price:
+                       $<span class="float-right" id='price'>{{ listing.purchase_amt }}</span>
+                       {% endif %}
+                     </li>
+                     <li class="list-group-item text-secondary">
+                       {% if listing.purchase_date %}
+                       Purchase Date:
+                       <span class="float-right">{{ listing.purchase_date }}</span>
+                       {% endif %}
+                     </li>
+                   </ul>
                  </div>
                  <div class="col-6">
-                   {% if listing.purchase_escrow_agent %}
-                     <h5>Escrow Agent: <span>{{listing.purchase_escrow_agent}}</span></h5>
-                   {% endif %}
+                   <ul class="list-group list-group-flush">
+                     <li class="list-group-item text-secondary">
+                       {% if listing.purchase_escrow_agent %}
+                       Agent:
+                       <span class="float-right">{{ listing.purchase_escrow_agent }}</span>
+                       {% endif %}
+                     </li>
+                     <li class="list-group-item text-secondary">
+                       {% if listing.purchase_escrow_number %}
+                       Escrow Number:
+                       <span class="float-right">{{ listing.purchase_escrow_number }}</span>
+                       {% endif %}
+                     </li>
+                   </ul>
                  </div>
-               </div>
-               <div class="row noi-row">
-                 <div class="col-6">
-                   {% if listing.purchase_date %}
-                     <h5>Purchase Date: <span>{{listing.purchase_date}}</span></h5>
-                   {% endif %}
-                 </div>
-                 <div class="col-6">
-                   {% if listing.purchase_escrow_number %}
-                     <h5>Escrow Number: <span>{{listing.purchase_escrow_number}}</span></h5>
-                   {% endif %}
-                 </div>
+
                </div>
                <div class="row noi-row">
                  <div class="col-12">
-                   <h3>Sale Details</h3>
+                   <h5>Sale Details</h5>
                  </div>
                  <hr>
                  <div class="col-6">
-                   {% if listing.sold_amt %}
-                     <h5>Sale Price: $<span>{{listing.sold_amt}}</span></h5>
-                   {% endif %}
+                   <ul class="list-group list-group-flush noi-list-group">
+                     <li class="list-group-item text-secondary">
+                       {% if listing.sold_amt %}
+                       Sale Price:
+                       <span class="float-right">${{ listing.sold_amt }}</span>
+                       {% endif %}
+                     </li>
+                     <li class="list-group-item text-secondary">
+                       {% if listing.sold_date %}
+                       Sale Date:
+                       <span class="float-right">{{ listing.sold_date }}</span>
+                       {% endif %}
+                     </li>
+                   </ul>
                  </div>
                  <div class="col-6">
-                   {% if listing.sold_date %}
-                     <h5>Escrow Agent: <span>{{listing.sale_escrow_agent}}</span></h5>
-                   {% endif %}
+                   <ul class="list-group list-group-flush noi-list-group">
+                     <li class="list-group-item text-secondary">
+                       {% if listing.sale_escrow_agent %}
+                       Agent:
+                       <span class="float-right">{{ listing.sale_escrow_agent }}</span>
+                       {% endif %}
+                     </li>
+                     <li class="list-group-item text-secondary">
+                       {% if listing.sale_escrow_number %}
+                       Escrow Number:
+                       <span class="float-right">{{ listing.sale_escrow_number }}</span>
+                       {% endif %}
+                     </li>
+                   </ul>
                  </div>
+
+
                </div>
+
                <div class="row noi-row">
+                 <div class="col-12">
+                   <h5>Property Value</h5>
+                 </div>
+                 <hr>
                  <div class="col-6">
-                   {% if listing.purchase_date %}
-                     <h5>Sale Date: <span>{{listing.sold_date}}</span></h5>
-                   {% endif %}
+                   <ul class="list-group list-group-flush noi-list-group">
+                     <li class="list-group-item text-secondary">
+                       {% if listing.current_value %}
+                       Current Value:
+                       <span class="float-right">${{ listing.current_value }}</span>
+                       {% endif %}
+                     </li>
+                     <li class="list-group-item text-secondary">
+                       {% if listing.sold_date %}
+                       Assessed Value:
+                       <span class="float-right">${{ listing.assessed_value }}</span>
+                       {% endif %}
+                     </li>
+                     <li class="list-group-item text-secondary">
+                       {% if listing.partner %}
+                       Partner:
+                       <span class="float-right">{{ listing.partner }}</span>
+                       {% endif %}
+                     </li>
+                   </ul>
                  </div>
                  <div class="col-6">
-                   {% if listing.sale_escrow_number %}
-                     <h5>Escrow Number: <span>{{listing.sale_escrow_number}}</span></h5>
-                   {% endif %}
+                   <ul class="list-group list-group-flush noi-list-group">
+                     <li class="list-group-item text-secondary">
+                       {% if listing.owned_equity %}
+                       Owned Equity:
+                       <span class="float-right">{{ listing.owned_equity }}%</span>
+                       {% endif %}
+                     </li>
+                     <li class="list-group-item text-secondary">
+                       {% if listing.owner %}
+                       Owner:
+                       <span class="float-right">{{ listing.owner }}</span>
+                       {% endif %}
+                     </li>
+                     <li class="list-group-item text-secondary">
+                       {% if listing.percent_ownership %}
+                       Percent Ownership:
+                       <span class="float-right">{{ listing.percent_ownership }}</span>
+                       {% endif %}
+                     </li>
+                   </ul>
                  </div>
+
+
                </div>
+
+
+
+
                <div class="row noi-row">
                  <div class="col-12">
                    <h3>Rent</h3>
                  </div>
                  <div class="col-6">
-                   <table class="table table-dark">
+                   <table class="table table-light">
                       <thead>
-                        <tr>
+                        <tr class='table-active'>
                           <th scope="col">Monthly</th>
                           <th scope="col">Annual</th>
                         </tr>
@@ -326,9 +409,9 @@
 
                  <hr>
                  <div class="col-8">
-                   <table class="table table-dark text-white" id='expense-table'>
+                   <table class="table table-light" id='expense-table'>
                       <thead>
-                        <tr>
+                        <tr class="table-active">
                           <th scope="col">Type</th>
                           <th scope="col">Monthly</th>
                           <th scope="col">Annual</th>
@@ -373,9 +456,9 @@
                    <h3>NOI</h3>
                  </div>
                  <div class="col-6">
-                   <table class="table table-dark">
+                   <table class="table table-light">
                       <thead>
-                        <tr>
+                        <tr class='table-active'>
                           <th scope="col">Monthly</th>
                           <th scope="col">Annual</th>
                         </tr>

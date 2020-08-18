@@ -58,7 +58,7 @@ function sumExpenses() {
     cell2.innerHTML = `$${total_sum}`;
     cell3.innerHTML = `$${total_sum * 12}`;
 
-    row.className = 'table-active';
+    row.className = 'table-bold';
   let noi1 = document.getElementById('noi-1');
   let noi2 = document.getElementById('noi-2');
   let rent = Number(document.getElementById('rent').innerHTML);
@@ -69,6 +69,7 @@ function sumExpenses() {
   noi2.innerHTML = `$${(rent * 12) - (total_sum * 12)}`
 
   cap_rate.innerHTML = ((rent * 12) - (total_sum * 12)) / price
+  console.log(`rent: ${rent} total_sum: ${total_sum} price: ${price}`)
 }
 
 
